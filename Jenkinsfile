@@ -22,16 +22,14 @@ node("linux") {
   stage("Build") {
     withEnv(mvnEnv) {
       timeout(time: 90, unit: 'MINUTES') {
-        // Run test phase / ignore test failures
         withMaven(
             maven: mvnName,
             jdk: "$jdk",
             publisherStrategy: 'EXPLICIT',
             globalMavenSettingsConfig: settingsName,
-            //options: [invokerPublisher(disabled: false)],
             mavenOpts: mavenOpts,
             mavenLocalRepo: localRepo) {
-          sh "mvn -V -B install -Dmaven.test.failure.ignore=true -e -DmavenHome=${mvntoolInvoker}"
+          sh "mvn -V -B clean install -Dmaven.test.failure.ignore=true -e -DmavenHome=${mvntoolInvoker}"
         }
         // Report failures in the jenkins UI
         junit testResults: '**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml'

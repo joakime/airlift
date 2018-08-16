@@ -1,6 +1,6 @@
 #!groovy
 
-def jdk = 'jdk8'
+def jdk = '1.8.0_151'
 
 node("linux") {
   def mvntool = tool name: 'maven3.5', type: 'hudson.tasks.Maven$MavenInstallation'

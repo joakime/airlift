@@ -21,7 +21,7 @@ node("linux") {
 
   stage("Build") {
     withEnv(mvnEnv) {
-      timeout(time: 90, unit: 'MINUTES') {
+      timeout(time: 290, unit: 'MINUTES') {
         withMaven(
             maven: mvnName,
             jdk: "$jdk",

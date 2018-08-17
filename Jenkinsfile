@@ -34,7 +34,7 @@ node("linux") {
           sh "mvn clean install -pl :http-client -am -Dtest=TestJettyHttpsClient*  -DfailIfNoTests=false"
         }
         // Report failures in the jenkins UI
-        junit testResults: '**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml', testDataPublishers: ""
+        junit testResults: '**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml'
         consoleParsers = [[parserName: 'JavaDoc'],
                           [parserName: 'JavaC']];
       }

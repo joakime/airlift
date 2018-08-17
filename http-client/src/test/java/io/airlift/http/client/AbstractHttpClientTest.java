@@ -59,6 +59,7 @@ import static com.google.common.base.Throwables.propagateIfPossible;
 import static com.google.common.base.Throwables.throwIfUnchecked;
 import static com.google.common.net.HttpHeaders.ACCEPT_ENCODING;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
+import static com.google.common.net.HttpHeaders.CONNECTION;
 import static com.google.common.net.HttpHeaders.CONTENT_LENGTH;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static com.google.common.net.HttpHeaders.LOCATION;
@@ -407,6 +408,14 @@ public abstract class AbstractHttpClientTest
         StatusResponse response2 = executeRequest(request, createStatusResponseHandler());
         Thread.sleep(1000);
         StatusResponse response3 = executeRequest(request, createStatusResponseHandler());
+
+        assertEquals(response1.getStatusCode(), 200);
+        assertEquals(response2.getStatusCode(), 200);
+        assertEquals(response3.getStatusCode(), 200);
+
+        assertThat(response1.getHeader(CONNECTION)).isNullOrEmpty();
+        assertThat(response2.getHeader(CONNECTION)).isNullOrEmpty();
+        assertThat(response3.getHeader(CONNECTION)).isNullOrEmpty();
 
         assertNotNull(response1.getHeader("remotePort"));
         assertNotNull(response2.getHeader("remotePort"));

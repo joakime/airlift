@@ -25,6 +25,7 @@ node("linux") {
         withMaven(
             maven: mvnName,
             jdk: "$jdk",
+            options: '[junitPublisher(disabled: false)]',
             publisherStrategy: 'EXPLICIT',
             globalMavenSettingsConfig: settingsName,
             mavenOpts: mavenOpts,
@@ -33,7 +34,7 @@ node("linux") {
           sh "mvn clean install -pl :http-client -am -Dtest=TestJettyHttpsClient*  -DfailIfNoTests=false"
         }
         // Report failures in the jenkins UI
-        junit testResults: '**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml'
+        junit testResults: '**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml', testDataPublishers: ""
         consoleParsers = [[parserName: 'JavaDoc'],
                           [parserName: 'JavaC']];
       }

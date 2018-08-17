@@ -29,7 +29,8 @@ node("linux") {
             globalMavenSettingsConfig: settingsName,
             mavenOpts: mavenOpts,
             mavenLocalRepo: localRepo) {
-          sh "mvn -V -B clean install -Dmaven.test.failure.ignore=true -e -DmavenHome=${mvntoolInvoker}"
+          //sh "mvn -V -B clean install -Dmaven.test.failure.ignore=true -e -DmavenHome=${mvntoolInvoker}"
+          sh "mvn clean install -pl :http-client -am -Dtest=TestJettyHttpsClientSpengo  -DfailIfNoTests=false"
         }
         // Report failures in the jenkins UI
         junit testResults: '**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml'

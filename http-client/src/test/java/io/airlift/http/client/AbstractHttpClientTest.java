@@ -393,7 +393,7 @@ public abstract class AbstractHttpClientTest
         assertEquals(servlet.getRequestUri(), uri);
     }
 
-    @Test(invocationCount = 200)
+    @Test(invocationCount = 600)
     public void testKeepAlive()
             throws Exception
     {

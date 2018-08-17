@@ -25,7 +25,7 @@ node("linux") {
         withMaven(
             maven: mvnName,
             jdk: "$jdk",
-            options: '[junitPublisher(disabled: false)]',
+            options: [junitPublisher(disabled: false)],
             publisherStrategy: 'EXPLICIT',
             globalMavenSettingsConfig: settingsName,
             mavenOpts: mavenOpts,
